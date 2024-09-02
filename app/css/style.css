@@ -1,0 +1,273 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "additional-styles/utility-patterns.css";
+@import "additional-styles/theme.css";
+@import "tailwindcss/utilities";
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #0D1F2D;
+  background-color: #F9F9F9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Responsive Typography */
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
+}
+
+/* Flexbox Utilities */
+.flex {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
+/* Layout Utilities */
+.max-w-4xl {
+  max-width: 64rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+/* Typography & Spacing */
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.leading-relaxed {
+  line-height: 1.75;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Button Styles */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.25rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.shadow {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transition {
+  transition: all 0.3s ease;
+}
+
+.hover\:text-\#0D1F2D:hover {
+  color: #0D1F2D;
+}
+
+/* Image Styles */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+/* Header Styles */
+header {
+  width: 100%;
+  top: 0;
+  z-index: 30;
+}
+
+.header-scroll {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fixed {
+  position: fixed;
+}
+
+/* Mobile Menu */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}
+
+/* Ensuring compatibility for older browsers */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .header-scroll {
+    background-color: #ffffff !important;
+    filter: none;
+  }
+
+  .flex-row,
+  .flex-row-reverse {
+    display: -ms-flexbox;
+    -ms-flex-pack: distribute;
+  }
+
+  .gap-8,
+  .gap-12 {
+    margin-right: 8px;
+  }
+
+  h1, h2, h3 {
+    word-wrap: break-word;
+  }
+}
+
+@supports (-ms-ime-align: auto) {
+  /* IE-specific rules */
+  .header-scroll {
+    background-color: #ffffff !important;
+    filter: none;
+  }
+
+  .flex-row,
+  .flex-row-reverse {
+    display: -ms-flexbox;
+    -ms-flex-pack: distribute;
+  }
+
+  .gap-8,
+  .gap-12 {
+    margin-right: 8px;
+  }
+
+  h1, h2, h3 {
+    word-wrap: break-word;
+  }
+}
+
+/* Full-screen image slideshow styles */
+.image-slide-show {
+  position: relative;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden;
+}
+
+.image-slide-show div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.image-slide-show div.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.image-slide-show img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.open-modal {
+  background-color: white;
+}
+
+textPath {
+  font-size: xx-large;
+}

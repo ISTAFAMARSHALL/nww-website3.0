@@ -1,0 +1,6 @@
+{
+  "/(default)/page": "app/(default)/page.js",
+  "/(default)/form/page": "app/(default)/form/page.js",
+  "/(default)/faq/page": "app/(default)/faq/page.js",
+  "/(default)/our-mission/page": "app/(default)/our-mission/page.js"
+}
