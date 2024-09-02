@@ -74,7 +74,6 @@ export default function ImageSlideShow() {
             src={img.image}
             alt={img.alt}
             fill
-            style={{ objectFit: "cover" }}
             priority={index === currentImageIndex}
           />
         </div>

@@ -45,8 +45,7 @@ export default function ContentComponent() {
             <Image
               src={item.image}
               alt={`Content Image ${index + 1}`}
-              layout="fill"
-              objectFit="cover"
+              fill
               className="rounded-lg"
             />
           </div>
