@@ -1,7 +1,3 @@
-Here's the updated README with the correct version specifications for `yarn` compared to `npm`:
-
----
-
 # More Than Just A Lunch - Web Application
 
 ## Table of Contents
@@ -30,14 +26,14 @@ Welcome to **More Than Just A Lunch**, a vibrant platform designed to foster con
 - **Dynamic Image Slideshow**: Captivating visuals on the homepage that set the tone for the experience.
 - **Impactful Messaging**: A strong, clear message that resonates with the values of our community.
 - **Easy Navigation**: Quick access to event registration, information about our mission, and user testimonials.
-- **Email Integration**: Seamless communication through our integration with the SendGrid API.
+- **Email Integration**: Seamless communication through our integration with the Mailjet API.
 
 ## Technologies Used
 
 - **Next.js**: A powerful React framework for building modern web applications.
 - **React**: A JavaScript library for crafting interactive user interfaces.
 - **Tailwind CSS**: A utility-first CSS framework for sleek and responsive designs.
-- **SendGrid**: A robust email API service for handling all our communication needs.
+- **Mailjet**: A robust email API service for handling all our communication needs.
 - **Vercel**: A platform for smooth deployment and scaling of our web application.
 
 ## Getting Started
@@ -73,7 +69,8 @@ Ensure your development environment is ready with the following tools:
 1. **Set Up Environment Variables**:
    Create a `.env.local` file in the root directory of the project and add the following environment variable:
    ```bash
-   SENDGRID_API_KEY=your-sendgrid-api-key
+   MJ_APIKEY_PUBLIC=your-mailjet-public-api-key
+   MJ_APIKEY_PRIVATE=your-mailjet-private-api-key
    ```
 
 2. **Start the Development Server**:
@@ -89,46 +86,64 @@ Ensure your development environment is ready with the following tools:
 
 ### API Integration
 
-This application leverages **SendGrid** for email communication. Here’s how to set it up:
+This application leverages **Mailjet** for email communication. Here’s how to set it up:
 
-1. **Create a SendGrid Account**:
-   - Sign up at [SendGrid](https://sendgrid.com/).
-   - Once signed up, navigate to the API keys section in your SendGrid dashboard.
+1. **Create a Mailjet Account**:
+   - Sign up at [Mailjet](https://www.mailjet.com/).
+   - Once signed up, navigate to the API keys section in your Mailjet dashboard.
 
 2. **Generate an API Key**:
    - Create an API key with appropriate permissions.
-   - Add the API key to your `.env.local` file:
+   - Add the API keys to your `.env.local` file:
      ```bash
-     SENDGRID_API_KEY=your-sendgrid-api-key
+     MJ_APIKEY_PUBLIC=your-mailjet-public-api-key
+     MJ_APIKEY_PRIVATE=your-mailjet-private-api-key
      ```
 
 3. **Integrate the API Key**:
-   - The `SENDGRID_API_KEY` environment variable will be used in your Next.js API routes to enable email sending functionality.
+   - The `MJ_APIKEY_PUBLIC` and `MJ_APIKEY_PRIVATE` environment variables will be used in your Next.js API routes to enable email sending functionality.
 
 #### Adding a Verified Email Address
 
-For SendGrid to send emails on your behalf, you need to add a verified sender email address in the `send-email.js` file. Here’s how to do it:
+For Mailjet to send emails on your behalf, you need to add a verified sender email address in the `send-email.js` file. Here’s how to do it:
 
 1. **Verify Your Email Address**:
-   - In your SendGrid dashboard, navigate to "Sender Authentication" and follow the steps to verify your sender email address.
+   - In your Mailjet dashboard, navigate to "Sender Addresses" and follow the steps to verify your sender email address.
 
 2. **Update the `send-email.js` File**:
    - Locate the `send-email.js` file in your Next.js project under the `/pages/api/` directory.
    - Modify the email sending code as follows:
      ```javascript
-     import sendEmail from '@sendgrid/mail';
+     import mailjet from 'node-mailjet';
 
-     sendEmail.setApiKey(process.env.SENDGRID_API_KEY);
+     const mj = mailjet.apiConnect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE);
 
      export default async function handler(req, res) {
        try {
-         await sendEmail({
-           to: 'someEmailAnyEmail@me.com', // Place the email you want this email sent to here
-           from: 'your-verified-email@example.com', // Use the email address you've verified
-           subject: 'More Than a Lunch Sign up Request Form',
-           text: 'Thank you for signing up for More Than a Lunch!',
-           html: '<strong>Thank you for signing up for More Than a Lunch!</strong>',
-         });
+         const request = mj
+           .post("send", { version: 'v3.1' })
+           .request({
+             Messages: [
+               {
+                 From: {
+                   Email: 'your-verified-email@example.com',
+                   Name: 'Your Name'
+                 },
+                 To: [
+                   {
+                     Email: 'someEmailAnyEmail@me.com',
+                     Name: 'Recipient Name'
+                   }
+                 ],
+                 Subject: 'More Than a Lunch Sign up Request Form',
+                 TextPart: 'Thank you for signing up for More Than a Lunch!',
+                 HTMLPart: '<strong>Thank you for signing up for More Than a Lunch!</strong>'
+               }
+             ]
+           });
+
+         const result = await request;
+         console.log('Email sent:', result.body);
          res.status(200).json({ message: 'Email sent successfully' });
        } catch (error) {
          console.error(error);
@@ -151,7 +166,7 @@ For SendGrid to send emails on your behalf, you need to add a verified sender em
    - From the Vercel dashboard, click on "New Project" and import your GitHub repository.
 
 3. **Configure Environment Variables**:
-   - In the Vercel dashboard, navigate to your project settings and add your environment variables, including the `SENDGRID_API_KEY`.
+   - In the Vercel dashboard, navigate to your project settings and add your environment variables, including the `MJ_APIKEY_PUBLIC` and `MJ_APIKEY_PRIVATE`.
 
 4. **Deploy**:
    - Once connected and configured, click "Deploy".
@@ -174,5 +189,3 @@ For inquiries or support, please reach out to Istafa at istafamarshall@me.com.
 **More Than Just A Lunch** is more than an application; it's a movement that brings people together. With this platform, we hope to continue fostering connections and creating memorable experiences around the table. Thank you for being part of our journey!
 
 ---
-
-This version of the README includes the correct version specifications for `npm` and `yarn`, along with detailed instructions on how to set the Node.js version, use npm v9.6.7 or later, and add a verified email address to your SendGrid integration.# nww-website3.0
