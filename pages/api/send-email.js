@@ -3,7 +3,9 @@ require('dotenv').config();
 
 import sgMail from "@sendgrid/mail"
 
-const SG_API_KEY = process.env.SENDGRID_API_KEY
+// const SG_API_KEY = process.env.SENDGRID_API_KEY
+
+const SG_API_KEY = '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'
 
 
 async function sendEmail({ to, from, subject, text, html }) {
