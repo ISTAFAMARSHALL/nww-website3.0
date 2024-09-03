@@ -62,8 +62,8 @@ export default async function handler(req, res) {
 
     try {
       await sendEmail({
-        to: 'istafamarshall@me', // Place email you want this email sent to here
-        from: 'istafamarshall@me', // Use the email address you've verified with Mailjet
+        to: 'istafamarshall@me.com', // Place email you want this email sent to here
+        from: 'istafamarshall@me.com', // Use the email address you've verified with Mailjet
         subject: 'More Than Just a Lunch Sign up Request Form',
         text: `Potential Attendee Request Submission Form ${fullName}`,
         html: `
